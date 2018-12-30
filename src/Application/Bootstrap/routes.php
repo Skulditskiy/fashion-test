@@ -15,3 +15,16 @@ $application->get(
         return $response->withHeader('Content-Type', 'application/json');
     }
 )->add($apiAuthenticationMiddleware);
+
+$application->get(
+    '[/]',
+    function (\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, $arguments) use ($container) {
+        /** @var \Slim\Views\Twig $view */
+        $view = $container->get(DiKeys::VIEW);
+        return $view->render(
+            $response,
+            'demo.twig',
+            []
+        );
+    }
+);

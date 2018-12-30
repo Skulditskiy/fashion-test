@@ -44,4 +44,13 @@ $container[DiKeys::ACTION_PRODUCTS_SEARCH_GET_V10] = function (\Slim\Container $
     );
 };
 
+$container[DiKeys::VIEW] = function (\Slim\Container $container) {
+    $view = new \Slim\Views\Twig(PROJECT_PATH .'/views', [
+        'cache' => false,
+        'debug' => true,
+    ]);
+    
+    return $view;
+};
+
 $application = new \Slim\App($container);

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product search API v1 demo</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            .form-group {
+                padding: 10px;
+            }
+            .form-group label {
+                display: inline-block;
+                width: 120px;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="apiDemoForm">
+            <div class="form-group"><label>Username</label> <input name="username"></div>
+            <div class="form-group"><label>Password</label> <input name="password"></div>
+            <div class="form-group"><label>Title like</label> <input name="title"></div>
+            <div class="form-group"><label>Brand like</label> <input name="brand"></div>
+            <div class="form-group">
+                <label>Sort by</label>
+                <select name="orderBy">
+                    <option>title</option>
+                    <option>brand</option>
+                    <option>price</option>
+                    <option>srock</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Order by</label>
+                <select name="orderDirection">
+                    <option>ASC</option>
+                    <option>DESC</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Offset</label> <input name="offset" value="0"></div>
+            <div class="form-group"><label>Limit</label> <input name="limit" value="10"></div>
+
+            <button>Send</button>
+        </form>
+
+        <div id="results"></div>
+        <script>
+
+            function getHeaders(formData) {
+                let headers = new Headers();
+                headers.set('Authorization', 'Basic ' + btoa(formData.get('username') + ":" + formData.get('password')));
+                headers.set('Accept', 'application/json');
+                headers.set('Content-Type', 'application/json');
+                return headers;
+            }
+
+            function renderProduct(product) {
+                return '<div class="singleProduct"><ul>' +
+                    '<li>Id: ' + product.id + '</li>' +
+                    '<li>Title: ' + product.title + '</li>' +
+                    '<li>Brand: ' + product.brand + '</li>' +
+                    '<li>Price: ' + product.price.amount/1000000 + ' ' + product.price.currency + '</li>' +
+                    '<li>Stock: ' + product.stock + '</li>' +
+                    '</ul></div>';
+            }
+
+            document.querySelector('#apiDemoForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                let formData = new FormData(event.target);
+
+                let requestData = [];
+                ['title', 'brand', 'orderBy', 'orderDirection', 'limit', 'offset'].forEach(function(inputName) {
+                    requestData[inputName] = formData.get(inputName);
+                });
+                let requestUrl = '/v1/products?' + Object.keys(requestData).map(function(key) {
+                    return key + '=' + requestData[key];
+                }).join('&');
+
+                fetch(requestUrl, {
+                    method: 'GET',
+                    headers: getHeaders(formData)
+                })
+                    .then(function(response) {
+                        switch (response.status) {
+                            case 401:
+                                alert('Wrong username or password');
+                                break;
+                            case 200:
+                                break;
+                        }
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        document.getElementById('results').innerHTML = data.map(renderProduct).join(' ');
+                    });
+
+            });
+        </script>
+    </body>
+</html>
