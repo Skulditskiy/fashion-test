@@ -14,3 +14,7 @@ Run unit tests with coverage report:
 ```
 php ./vendor/phpunit/phpunit/phpunit --coverage-text --bootstrap ./vendor/autoload.php --configuration ./tests/phpunit.xml ./tests
 ```
+
+Notes on proposed solution:
+- with no info about price, decision was to couple price with currency to avoid any kind of errors regarding different currencies
+- to be on safe side prices kept as price * 1000000 (one million)
