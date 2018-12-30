@@ -1,0 +1,12 @@
+<phpunit colors="false" verbose="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.0/phpunit.xsd">
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../src/</directory>
+            <exclude>
+                <directory suffix=".php">../src/Application/Bootstrap</directory>
+                <directory suffix=".php">../src/Application/Migrations</directory>
+                <directory suffix=".php">../src/Application/Seeds</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
