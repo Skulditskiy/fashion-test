@@ -36,7 +36,7 @@ $container[DiKeys::ENTITY_MANAGER] = function (\Slim\Container $container) {
     );
 };
 
-$container[DiKeys::ACTION_PRODUCTS_SEARCH_GET] = function (\Slim\Container $container) {
+$container[DiKeys::ACTION_PRODUCTS_SEARCH_GET_V10] = function (\Slim\Container $container) {
     return new \Skulditskiy\FashionTest\Infrastructure\Controllers\V10\ProductsSearch(
         new \Skulditskiy\FashionTest\Infrastructure\Persistence\Doctrine\ProductRepository($container->get(DiKeys::ENTITY_MANAGER)),
         new \Skulditskiy\FashionTest\Domain\Product\SearchRequestFactory(),
