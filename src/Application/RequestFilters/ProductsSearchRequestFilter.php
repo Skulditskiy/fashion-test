@@ -27,7 +27,7 @@ class ProductsSearchRequestFilter extends InputFilter
         $this->add($orderByInput);
 
         $orderDirectionInput = new Input('orderDirection');
-        $orderDirectionInput->setFallbackValue('price');
+        $orderDirectionInput->setFallbackValue('ASC');
         $orderDirectionInput->getValidatorChain()->attach(new StringLength(['max' => 6]));
         $this->add($orderDirectionInput);
 
