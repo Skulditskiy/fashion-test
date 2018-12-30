@@ -1,0 +1,31 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    image: myphpdocker
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_DATABASE: testdbname
+      DB_USERNAME: testdbuser
+      DB_PASSWORD: password
+      PHINX_DB_HOST: mysql
+      PHINX_DB_DATABASE: testdbname
+      PHINX_DB_USERNAME: testdbuser
+      PHINX_DB_PASSWORD: password
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 13306:13306
+    environment:
+      MYSQL_DATABASE: testdbname
+      MYSQL_USER: testdbuser
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password

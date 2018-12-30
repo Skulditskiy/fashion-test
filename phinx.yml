@@ -1,0 +1,13 @@
+paths:
+    migrations: "%%PHINX_CONFIG_DIR%%/src/Application/Migrations"
+    seeds: "%%PHINX_CONFIG_DIR%%/src/Application/Seeds"
+environments:
+    default_migration_table: phinxlog
+    development:
+        adapter: mysql
+        host: "%%PHINX_DB_HOST%%"
+        name: "%%PHINX_DB_DATABASE%%"
+        user: "%%PHINX_DB_USERNAME%%"
+        pass: "%%PHINX_DB_PASSWORD%%"
+        charset: utf8
+        collation: utf8_unicode_ci
