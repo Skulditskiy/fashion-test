@@ -8,4 +8,5 @@ class DiKeys
     const APPLICATION_CONFIG = 'applicationConfig';
     const ENTITY_MANAGER = 'entityManager';
     const VIEW = 'view';
+    const PRODUCT_CSV_REPOSITORY = 'productCscRepository';
 }

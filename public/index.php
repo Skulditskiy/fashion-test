@@ -1,11 +1,16 @@
 <?php
 
-require '../vendor/autoload.php';
+$projectPath = dirname(__DIR__) ;
 
-require '../src/Application/Bootstrap/dependencies.php';
-require '../src/Application/Bootstrap/routes.php';
+require $projectPath . '/vendor/autoload.php';
+
+require $projectPath . '/src/Application/Bootstrap/dependencies.php';
+require $projectPath . '/src/Application/Bootstrap/routes.php';
 
 try {
+    $container->get(\Skulditskiy\FashionTest\Application\Bootstrap\DiKeys::ACTION_PRODUCTS_SEARCH_GET_V10);
+    die();
+
     $application->run();
 } catch (\Slim\Exception\MethodNotAllowedException $e) {
 } catch (\Slim\Exception\NotFoundException $e) {

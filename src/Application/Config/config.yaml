@@ -1,2 +1,4 @@
 apiUsers:
   demoUser: "demoPassword"
+product:
+  csvRepositoryPath: "product_list.csv"

@@ -19,20 +19,38 @@ class Money implements \JsonSerializable
     private $currency;
 
     /**
-     * @param int $amount
+     * @param float $amount
      * @param string $currency
      */
-    public function __construct(int $amount, string $currency)
+    public function __construct(float $amount, string $currency)
     {
-        $this->amount = $amount;
+        $this->amount = $amount * self::MULTIPLIER;
         $this->currency = $currency;
     }
 
     public function jsonSerialize()
     {
         return [
-            'amount' => $this->amount,
+            'amount' => $this->amount / self::MULTIPLIER,
             'currency' => $this->currency,
         ];
     }
+
+    /**
+     * @return int
+     */
+    public function getAmount(): int
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
+
+
 }
