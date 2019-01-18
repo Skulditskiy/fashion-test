@@ -36,9 +36,18 @@ $container[DiKeys::ENTITY_MANAGER] = function (\Slim\Container $container) {
     );
 };
 
+$container[DiKeys::PRODUCT_CSV_REPOSITORY] = function (\Slim\Container $container) {
+    $csvFilePath = $container->get(DiKeys::APPLICATION_CONFIG)['product']['csvRepositoryPath'];
+    return new \Skulditskiy\FashionTest\Infrastructure\Persistence\Csv\ProductRepository(
+        $csvFilePath,
+        new \Skulditskiy\FashionTest\Domain\Product\Factory(),
+        new \Skulditskiy\FashionTest\Infrastructure\Persistence\Csv\FileReader()
+    );
+};
+
 $container[DiKeys::ACTION_PRODUCTS_SEARCH_GET_V10] = function (\Slim\Container $container) {
     return new \Skulditskiy\FashionTest\Infrastructure\Controllers\V10\ProductsSearch(
-        new \Skulditskiy\FashionTest\Infrastructure\Persistence\Doctrine\ProductRepository($container->get(DiKeys::ENTITY_MANAGER)),
+        $container->get(DiKeys::PRODUCT_CSV_REPOSITORY),
         new \Skulditskiy\FashionTest\Domain\Product\SearchRequestFactory(),
         new \Skulditskiy\FashionTest\Application\RequestFilters\ProductsSearchRequestFilter()
     );

@@ -47,13 +47,52 @@ class Product implements \JsonSerializable
      * @param Money $price
      * @param int $stock
      */
-    public function __construct(string $id, string $title, string $brand, Money $price, int $stock)
+    public function __construct(string $title, string $brand, Money $price, int $stock)
     {
-        $this->id = $id;
         $this->title = $title;
         $this->brand = $brand;
         $this->price = $price;
         $this->stock = $stock;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrand(): string
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @return Money
+     */
+    public function getPrice(): Money
+    {
+        return $this->price;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStock(): string
+    {
+        return $this->stock;
     }
 
     public function jsonSerialize()

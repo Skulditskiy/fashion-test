@@ -17,7 +17,7 @@ class ProductTest extends TestCase
         /** @var Money|MockObject $priceMock */
         $priceMock = $this->createMock(Money::class);
 
-        $classUnderTest = new Product('some id', 'some title', 'some brand', $priceMock, 123);
+        $classUnderTest = new Product('some title', 'some brand', $priceMock, 123);
 
         // test
 
@@ -31,7 +31,7 @@ class ProductTest extends TestCase
     public function jsonSerialize_test()
     {
         // prepare
-        $id = 'some id';
+        $id = '';
         $title = 'some title';
         $brand = 'some brand';
         $stock = 123;
@@ -39,10 +39,10 @@ class ProductTest extends TestCase
         /** @var Money|MockObject $priceMock */
         $priceMock = $this->createMock(Money::class);
 
-        $classUnderTest = new Product($id, $title, $brand, $priceMock, $stock);
+        $classUnderTest = new Product($title, $brand, $priceMock, $stock);
 
         $expectedResult = [
-            'id' => $id,
+            'id' => '',
             'title' => $title,
             'brand' => $brand,
             'price' => $priceMock,

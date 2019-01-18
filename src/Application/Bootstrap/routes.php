@@ -2,10 +2,6 @@
 
 use Skulditskiy\FashionTest\Application\Bootstrap\DiKeys;
 
-$apiAuthenticationMiddleware = new Tuupola\Middleware\HttpBasicAuthentication([
-    'users' => $container->get(DiKeys::APPLICATION_CONFIG)['apiUsers'],
-    'secure' => false,
-]);
 
 $application->get(
     '/v1/products',
@@ -14,7 +10,7 @@ $application->get(
         $response = $container->get(DiKeys::ACTION_PRODUCTS_SEARCH_GET_V10)->execute($request, $response, $arguments);
         return $response->withHeader('Content-Type', 'application/json');
     }
-)->add($apiAuthenticationMiddleware);
+);
 
 $application->get(
     '[/]',
